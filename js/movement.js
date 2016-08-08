@@ -15,9 +15,9 @@ Bola.prototype.movement = function() {
 		this.Position.y = y;
 	}
 
-	if (x-this.radio <= 0) {
+	if (x-this.radio <= escenario.origin.x) {
 		this.direction.x *= (-1);
-		this.Position.x = this.radio;
+		this.Position.x = escenario.origin.x + this.radio;
 	} else if (x+this.radio >= escenario.width) {
 		this.direction.x *= (-1);
 		this.Position.x = escenario.width-this.radio;		
@@ -26,9 +26,9 @@ Bola.prototype.movement = function() {
 	}
 
 
-	if (y-this.radio < 0) {
+	if (y-this.radio < escenario.origin.y) {
 		this.direction.y *= (-1);
-		this.Position.y = this.radio;
+		this.Position.y = escenario.origin.y + this.radio;
 	} else if (y+this.radio > escenario.height) {
 		this.direction.y *= (-1);
 		this.Position.y = escenario.height-this.radio;		
@@ -37,48 +37,6 @@ Bola.prototype.movement = function() {
 	}
 
 
-
-	/*var a = 0.5 * escenario.drag * Math.pow(this.tiempo,2);
-	this.tiempo += 1/33;
-
-	if (this.speed.x > 0) {
-			a *= (-1);
-	} else if (this.speed.x < 0) {
-			a *= (1);
-	}
-	
-	if (this.speed.y > 0) {
-			a *= (-1);
-	} else if (this.speed.y < 0) {
-			a *= (1);
-	}
-
-	
-	var x = this.Position.x + this.speed.x +a;
-	var y = this.Position.y + this.speed.y +a;
-
-	if (x-this.radio <= 0) {
-		this.speed.x *= (-1);
-		this.Position.x = this.radio;
-	} else if (x+this.radio >= escenario.width) {
-		this.speed.x *= (-1);
-		this.Position.x = escenario.width-this.radio;		
-	} else {
-		this.Position.x = x;
-	}
-
-
-	if (y-this.radio < 0) {
-		this.speed.y *= (-1);
-		this.Position.y = this.radio;
-	} else if (y+this.radio > escenario.height) {
-		this.speed.y *= (-1);
-		this.Position.y = escenario.height-this.radio;		
-	} else {
-		this.Position.y = y;
-	}
-
-	*/
 
 	this.checkCollision();
 
