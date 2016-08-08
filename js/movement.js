@@ -8,6 +8,7 @@ Bola.prototype.movement = function() {
 	this.speed = this.speed.substract(drag);
 	if (this.speed.Length() < 0.5) {
 		this.speed = V(0,0);
+		this.direction = V(1,1);
 	}
 
 	if (x-this.radio <= escenario.origin.x) {
