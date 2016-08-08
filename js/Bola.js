@@ -40,9 +40,14 @@ Bola.prototype = {
 			case "dying":
 			{
 				this.radio -= 0.25;
+				// Get pointer
+				this.getMouse();
+				// move
+				this.movement();
+				// Draw
 				if(this.radio <= 0){
 					this.status = "dead";
-				}
+				} 
 			} break;
 
 			default:
