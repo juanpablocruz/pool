@@ -15,9 +15,9 @@ Bola.prototype.movement = function() {
 		this.Position.y = y;
 	}
 
-	if (x-this.radio <= 0) {
+	if (x-this.radio <= escenario.origin.x) {
 		this.direction.x *= (-1);
-		this.Position.x = this.radio;
+		this.Position.x = escenario.origin.x + this.radio;
 	} else if (x+this.radio >= escenario.width) {
 		this.direction.x *= (-1);
 		this.Position.x = escenario.width-this.radio;		
@@ -26,9 +26,9 @@ Bola.prototype.movement = function() {
 	}
 
 
-	if (y-this.radio < 0) {
+	if (y-this.radio < escenario.origin.y) {
 		this.direction.y *= (-1);
-		this.Position.y = this.radio;
+		this.Position.y = escenario.origin.y + this.radio;
 	} else if (y+this.radio > escenario.height) {
 		this.direction.y *= (-1);
 		this.Position.y = escenario.height-this.radio;		
