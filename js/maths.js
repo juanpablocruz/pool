@@ -27,6 +27,13 @@ Vector.prototype = {
 		
 	},
 
+	//Devuelve el módulo del vector generado por dos puntos. (O la distancia entre los dos putos)
+	module: function(vector2) {
+		if(typeof vector2 == "object"){
+			return Math.sqrt(Math.pow(this.x - vector2.x, 2) + Math.pow(this.y - vector2.y, 2)); 
+		}
+	},
+
 	argumento: function() {
 		return Math.atan2(this.y,this.x);
 	},

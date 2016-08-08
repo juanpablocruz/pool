@@ -124,9 +124,8 @@ Cell.prototype = {
         this.canvas.addEventListener("mousedown", this.createArrow);
         this.canvas.addEventListener("mousemove", this.updateArrow);
 
-        escenario = new Scenario(fondo,this.ctx);
-        escenario.width = this.ctx.canvas.width;
-        escenario.height = this.ctx.canvas.height;
+        escenario = new Scenario(fondo,this.ctx, 800,600);
+        escenario.init();
 
         setInterval(this.update.bind(this), 33);
     },
