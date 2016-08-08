@@ -66,24 +66,28 @@ Scenario.prototype = {
 	drawBorders: function() {
 		// Left border
 		this.ctx.drawImage(this.borderLeftImg, 0, 0, this.borderLeftImg.width, this.borderLeftImg.height, 
-										    this.origin.x, this.origin.y, this.borderLeftImg.width, this.height);
+										    this.origin.x-this.borderLeftImg.width, this.origin.y-this.borderLeftImg.width, 
+										    this.borderLeftImg.width, this.height+2*this.borderLeftImg.width);
 
 		// Right border
 		this.ctx.drawImage(this.borderRightImg, 0, 0, this.borderRightImg.width, this.borderRightImg.height, 
-										    this.origin.x+this.width-this.borderRightImg.width, this.origin.y, this.borderRightImg.width, this.height);
+										    this.origin.x+this.width, this.origin.y-this.borderRightImg.width, 
+										    this.borderRightImg.width, this.height+2*this.borderRightImg.width);
 
 		// Top border
 		this.ctx.drawImage(this.borderTopImg, 0, 0, this.borderTopImg.width, this.borderTopImg.height, 
-										    this.origin.x, this.origin.y, this.width, this.borderBottomImg.height);
+										    this.origin.x-this.borderLeftImg.width, this.origin.y-(this.borderBottomImg.height), 
+										    this.width+2*(this.borderBottomImg.height), this.borderBottomImg.height);
 
 		// Bottom border
 		this.ctx.drawImage(this.borderBottomImg, 0, 0, this.borderBottomImg.width, this.borderBottomImg.height, 
-										    this.origin.x, this.origin.y+this.height-this.borderBottomImg.height, this.width, this.borderBottomImg.height);
+										    this.origin.x-this.borderLeftImg.width, this.origin.y+this.height, 
+										    this.width+2*(this.borderBottomImg.height), this.borderBottomImg.height);
 
 	},
 
 	getRandomPos: function() {
-		return V((Math.random() * this.width) + this.origin.x,(Math.random() * this.height) + this.origin.y);
+		return V((Math.random() * (this.width-240)) + (this.origin.x),(Math.random() * (this.height-240)) + (this.origin.y));
 	},
 
 	generateHoles: function() {
@@ -105,12 +109,11 @@ Scenario.prototype = {
 
 	drawHolesFunc: function(elem) {
         //this.ctx.putImageData(this.holeImage, elem.pos.x, elem.pos.y, elem.pos.x, elem.pos.y, elem.pos.x+elem.radio, elem.pos.y+elem.radio);
-        //this.ctx.translate(this.origin.x,this.origin.y)
-        //this.ctx.rotate(Math.PI/4);
+        this.ctx.translate(this.origin.x-(elem.radio/2),this.origin.y-(elem.radio/2))
         this.ctx.drawImage(this.holeImage, elem.pos.x, elem.pos.y, 
         					elem.radio, elem.radio);
         //this.ctx.rotate(-Math.PI/4);
-        //this.ctx.translate(-this.origin.x,-this.origin.y)
+        this.ctx.translate(-(this.origin.x-(elem.radio/2)),-(this.origin.y-(elem.radio/2)))
 	},
 
 	drawHoles: function() {

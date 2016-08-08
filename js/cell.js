@@ -1,6 +1,6 @@
 var modules = [];    // Lista de modulos disponibles
 var error = [""];
-var Cursor = {x: 0, y: 0};
+var Cursor = V(0,0);
 
 var fondo = "assets/background.jpg";
 var escenario;

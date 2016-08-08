@@ -1,8 +1,8 @@
 var arrowColors = ["#00cc00","#cccc00","#cc0000"];
 
 var Arrow = function() {
-	this.startPos = {x: 0, y: 0};
-	this.endPos = {x: 0, y: 0};
+	this.startPos = V(0,0);
+	this.endPos = V(0,0);
 	this.show = false;
 	this.color = "green";
 };
@@ -10,20 +10,25 @@ var Arrow = function() {
 Arrow.prototype = {
 	draw: function(canvas, ctx) {
 		var headlen = 10;   // length of head in pixels
-	    var angle = Math.atan2(this.endPos.y-this.startPos.y,
-	    						this.endPos.x-this.startPos.x);
-	  	var size = Math.sqrt((this.endPos.y-this.startPos.y)*(this.endPos.y-this.startPos.y)+
-	    					 (this.endPos.x-this.startPos.x)*(this.endPos.x-this.startPos.x));
+		var subst = this.endPos.substract(this.startPos);
+	    
+	    var angle = Math.atan2(subst.y, subst.x);
+	  	var size = subst.Length();
 
-	  	if(size > 400) {
-	  		size = 400;
-	  		this.endPos.x = Math.cos(angle)*size;
-	  		this.endPos.y = Math.sin(angle)*size;
-	  	}
+/*
+	  	if(size > 300) {
+	  		size = 300;
+	  		posX = Math.cos(angle)*size;
+	  		posY = Math.sin(angle)*size;
+	  		if(!posX)posX = this.startPos.x; 
+	  		if(!posY)posY = this.startPos.y; 
+	  		this.endPos = V(posX, posY);
+	  	}*/
+
 	  	var fill = arrowColors[0];
-	  	if(size >= 200) {
+	  	if(size >= 250) {
 	  		fill = arrowColors[2];
-	  	} else if(size >= 60) {
+	  	} else if(size >= 80) {
 	  		fill = arrowColors[1];
 	  	}
 
