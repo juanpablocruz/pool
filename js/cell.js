@@ -88,7 +88,6 @@ Cell.prototype = {
 
         this.updateBalls();
         if(arrow.show) {
-            console.log(arrow.show,arrow.startPos);
             arrow.draw(this.canvas, this.ctx);
         }
     },
@@ -125,17 +124,13 @@ Cell.prototype = {
         //this.drawCircle(centerX, centerY, radius, "green");
         userBall.listaBolas = this.pelotas;
         var colBola = new Bola();
-        colBola.Position.x = this.ctx.canvas.width/2;
-        colBola.Position.y = this.ctx.canvas.height/2;
-        colBola.color = "red";
-        colBola.radio = 70;
+        colBola.init(V(this.ctx.canvas.width/2,this.ctx.canvas.height/2),
+                     30, "red");
         this.pelotas.push(colBola);
 
         var colBola2 = new Bola();
-        colBola2.Position.x = -230 + this.ctx.canvas.width/2;
-        colBola2.Position.y = this.ctx.canvas.height/2;
-        colBola2.color = "purple";
-        colBola2.radio = 30;
+        colBola2.init(V(-230 + this.ctx.canvas.width/2,this.ctx.canvas.height/2),
+                      30,"purple");
         this.pelotas.push(colBola2);
         
         this.canvas.addEventListener("mouseup", this.shootBallEvent);

@@ -8,7 +8,12 @@ var Bola = function() {
 };
 
 Bola.prototype = {
-	getCursorXY(e) {   
+	init: function(pos, radio, color) {
+		this.Position = pos;
+		this.radio = radio;
+		this.color = color;
+	},
+	getCursorXY: function(e) {   
 	    CurX = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
 	    CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
 		Cursor.x = CurX;
