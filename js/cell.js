@@ -44,11 +44,16 @@ Cell.prototype = {
     updateBalls: function() {
         for(var i = 0; i < this.pelotas.length; i++) {
             var element = this.pelotas[i];
-            element.update();
-            this.drawCircle(element.Position.x,
-                      element.Position.y,
-                      element.radio,
-                      element.color);
+            if(element.status == "dead") {
+                this.pelotas.slice(i,1);
+            } else {
+                element.update();
+                this.drawCircle(element.Position.x,
+                          element.Position.y,
+                          element.radio,
+                          element.color);
+            }
+            
         }
     },
 
@@ -122,8 +127,10 @@ Cell.prototype = {
         var radius = 70;
 
         //this.drawCircle(centerX, centerY, radius, "green");
+        userBall.init(V(250,200),25,"green");
         userBall.listaBolas = this.pelotas;
-        var colBola = new Bola();
+
+        var colBola = new Bola(V(0,0),0,0);
         colBola.init(V(this.ctx.canvas.width/2,this.ctx.canvas.height/2),
                      30, "red");
         this.pelotas.push(colBola);
