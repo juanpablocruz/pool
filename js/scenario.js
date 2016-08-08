@@ -7,6 +7,7 @@ var Scenario = function(strDataURI,ctx,w,h) {
 	this.ctx = ctx;
 	this.img.src = strDataURI;
 	this.origin = V(0,0);
+	this.holesList = [];
 };
 
 Scenario.prototype = {
@@ -23,15 +24,12 @@ Scenario.prototype = {
 	},
 
 	update: function() {
+		console.log(this.holesList);
+		this.updateHoles();
 		this.draw();
 	},
 
 	drawBorders: function() {
-		//this.ctx.beginPath();
-		//this.ctx.lineWidth="6";
-		//this.ctx.strokeStyle="red";
-		//this.ctx.rect(this.origin.x, this.origin.y,this.width,this.height);
-
 		// Left border
 		this.ctx.drawImage(this.borderLeftImg, 0, 0, this.borderLeftImg.width, this.borderLeftImg.height, 
 										    this.origin.x, this.origin.y, this.borderLeftImg.width, this.height);
@@ -48,13 +46,47 @@ Scenario.prototype = {
 		this.ctx.drawImage(this.borderBottomImg, 0, 0, this.borderBottomImg.width, this.borderBottomImg.height, 
 										    this.origin.x, this.origin.y+this.height-this.borderBottomImg.height, this.width, this.borderBottomImg.height);
 
-		
-		
-		//this.ctx.stroke();
 	},
 
-	draw: function(ctx) {
+	getRandomPos: function() {
+		return V((Math.random() * this.width) + this.origin.x,(Math.random() * this.height) + this.origin.y);
+	},
+
+	generateHoles: function() {
+		if(this.holesList.length < 2) {
+			var pos = this.getRandomPos();
+			this.holesList.push(new Hole(pos.x, pos.y));
+		}
+	},
+
+	updateHoles: function() {
+		this.generateHoles();
+		for(var i = 0; i < this.holesList.length; i++) {
+			if(this.holesList[i].ticks <= 0) {
+				this.holesList.splice(i,1);
+			}
+			this.holesList[i].update();
+		}
+	},
+
+	drawHolesFunc: function(elem) {
+		this.ctx.beginPath();
+        this.ctx.arc(elem.pos.x, elem.pos.y, elem.radio, 0, 2 * Math.PI, false);
+        this.ctx.fillStyle = "#FF4400";
+        this.ctx.fill();
+        this.ctx.lineWidth = 5;
+	},
+
+	drawHoles: function() {
+		for(var i = 0; i < this.holesList.length; i++){
+			this.drawHolesFunc(this.holesList[i]);
+		}
+		
+	},
+
+	draw: function() {
 		this.ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, this.origin.x, this.origin.y, this.width, this.height);
-		this.drawBorders(ctx);
+		this.drawBorders();
+		this.drawHoles();
 	},
 }
