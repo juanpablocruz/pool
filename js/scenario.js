@@ -21,12 +21,46 @@ Scenario.prototype = {
 		this.borderTopImg.src = "assets/border_top.jpg";
 		this.borderBottomImg = new Image;
 		this.borderBottomImg.src = "assets/border_bottom.jpg";
+
+		console.log(this.img.src);
+		var self = this;
+		this.img.onload = function() {
+			self.backgroundPattern = self.ctx.createPattern(self.img,"repeat");
+		}
+		this.prepareHoleImage();
+		
+	},
+
+	prepareHoleImage: function() {
+		var src = "assets/vortex.png";
+		var tempImg = new Image();
+		
+		tempImg.src = src;
+		this.holeImage = tempImg;
+		/*var self = this;
+		tempImg.onload = function() {
+			self.ctx.drawImage(tempImg, 0, 0);
+			var image = self.ctx.getImageData(0, 0, tempImg.width, tempImg.height);
+			var imageData = image.data;
+			for(var i = 0; i < imageData.length; i += 4) {
+				if((imageData[i] == 0) && (imageData[i+1] == 0) && (imageData[i+2] == 0)) {
+					imageData[i+3] = 255;
+				}
+			}
+			image.data = imageData;
+			self.holeImage = image;
+		}*/
+		
 	},
 
 	update: function() {
-		console.log(this.holesList);
 		this.updateHoles();
 		this.draw();
+	},
+
+	resize: function(w, h) {
+		this.width = w;
+		this.height = h;
 	},
 
 	drawBorders: function() {
@@ -70,11 +104,13 @@ Scenario.prototype = {
 	},
 
 	drawHolesFunc: function(elem) {
-		this.ctx.beginPath();
-        this.ctx.arc(elem.pos.x, elem.pos.y, elem.radio, 0, 2 * Math.PI, false);
-        this.ctx.fillStyle = "#FF4400";
-        this.ctx.fill();
-        this.ctx.lineWidth = 5;
+        //this.ctx.putImageData(this.holeImage, elem.pos.x, elem.pos.y, elem.pos.x, elem.pos.y, elem.pos.x+elem.radio, elem.pos.y+elem.radio);
+        //this.ctx.translate(this.origin.x,this.origin.y)
+        //this.ctx.rotate(Math.PI/4);
+        this.ctx.drawImage(this.holeImage, elem.pos.x, elem.pos.y, 
+        					elem.radio, elem.radio);
+        //this.ctx.rotate(-Math.PI/4);
+        //this.ctx.translate(-this.origin.x,-this.origin.y)
 	},
 
 	drawHoles: function() {
@@ -85,7 +121,11 @@ Scenario.prototype = {
 	},
 
 	draw: function() {
-		this.ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, this.origin.x, this.origin.y, this.width, this.height);
+		//this.ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, this.origin.x, this.origin.y, this.width, this.height);
+		
+		this.ctx.rect(this.origin.x, this.origin.y,this.width, this.height);
+		this.ctx.fillStyle=this.backgroundPattern;
+		this.ctx.fill();
 		this.drawBorders();
 		this.drawHoles();
 	},

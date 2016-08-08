@@ -4,9 +4,6 @@ Bola.prototype.movement = function() {
 	var x = this.Position.x + (this.speed.x - escenario.drag)*this.direction.x;
 	var y = this.Position.y + (this.speed.y - escenario.drag)*this.direction.y;
 
-	var pos = V(0,0);
-	pos = this.Position.add(this.speed.substract(escenario.drag).Hadamard(this.direction));
-
 
 	if (this.speed.x - escenario.drag < 1) {
 		this.Position.x = x;
