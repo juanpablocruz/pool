@@ -1,0 +1,30 @@
+var Bola = function() {
+	this.Position = V(100,100);
+	this.radio = 50;
+	this.color = "green";
+	this.speed = V(0,0);
+	this.direction = V(1,1);
+	this.tiempo = 0;
+	this.listaBolas = [];
+};
+
+Bola.prototype = {
+	getCursorXY(e) {   
+	    CurX = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
+	    CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
+		Cursor.x = CurX;
+		Cursor.y = CurY;
+	},
+	getMouse: function(){
+		document.captureEvents(Event.MOUSEMOVE);
+		document.onmousemove = this.getCursorXY;
+	},
+	update: function() {
+		// Get pointer
+		this.getMouse();
+		// move
+		this.movement();
+		// Draw
+
+	},
+};
