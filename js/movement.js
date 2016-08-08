@@ -1,22 +1,20 @@
 Bola.prototype.movement = function() {
-	
+	//Probando git
 
-	var x = this.Position.x + (this.speed.x - escenario.drag)*this.direction.x;
-	var y = this.Position.y + (this.speed.y - escenario.drag)*this.direction.y;
+	var x = this.Position.x + (this.speed.x)*this.direction.x;
+	var y = this.Position.y + (this.speed.y)*this.direction.y;
 
-
-	if (this.speed.x - escenario.drag < 1) {
-		this.Position.x = x;
-	}
-	if (this.speed.y - escenario.drag < 1) {
-		this.Position.y = y;
+	var drag = this.speed.multEsc(0.02);
+	this.speed = this.speed.substract(drag);
+	if (this.speed.Length() < 0.5) {
+		this.speed = V(0,0);
 	}
 
 	if (x-this.radio <= escenario.origin.x) {
-		this.direction.x *= (-1);
+		this.direction.x *= -1;
 		this.Position.x = escenario.origin.x + this.radio;
 	} else if (x+this.radio >= (escenario.origin.x +escenario.width)) {
-		this.direction.x *= (-1);
+		this.direction.x *= -1;
 		this.Position.x = escenario.origin.x + escenario.width-this.radio;		
 	} else {
 		this.Position.x = x;
@@ -24,30 +22,26 @@ Bola.prototype.movement = function() {
 
 
 	if (y-this.radio < escenario.origin.y) {
-		this.direction.y *= (-1);
+		this.direction.y *= -1;
 		this.Position.y = escenario.origin.y + this.radio;
 	} else if (y+this.radio > (escenario.origin.y +escenario.height)) {
-		this.direction.y *= (-1);
+		this.direction.y *= -1;
 		this.Position.y = escenario.origin.y +escenario.height-this.radio;		
 	} else {
 		this.Position.y = y;
 	}
 
-
+	//console.log(this.Position.x, this.Position.y);
 
 	this.checkCollision();
-
-	//console.log(Math.floor(this.speed.x), Math.floor(this.speed.y));
 }
 
 Bola.prototype.shoot = function() {
+	var cursor = V(Cursor.x, Cursor.y);
+
 	if (this.speed.x == 0 && this.speed.y ==0) {
-		this.speed.x = (Cursor.x - this.Position.x)/20;
-		this.speed.y = (Cursor.y - this.Position.y)/20;
+		this.speed = cursor.substract(this.Position).multEsc(0.2);
+	} else {
+		console.log("Espera que la bola se detenga...");
 	}
-	this.tiempo = 0;
-	/* else {
-		this.speed.x = 0;
-		this.speed.y = 0;
-	}*/
 }

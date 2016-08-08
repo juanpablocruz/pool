@@ -1,10 +1,9 @@
 var Bola = function() {
-	this.Position = V(100,100);
-	this.radio = 50;
+	this.Position = V(250,200);
+	this.radio = 25;
 	this.color = "green";
 	this.speed = V(0,0);
 	this.direction = V(1,1);
-	this.tiempo = 0;
 	this.listaBolas = [];
 };
 
