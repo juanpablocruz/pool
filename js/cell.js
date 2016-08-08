@@ -2,7 +2,7 @@ var modules = [];    // Lista de modulos disponibles
 var error = [""];
 var Cursor = {x: 0, y: 0};
 
-var fondo = "http://www.awf.org/sites/default/files/media/gallery/wildlife/Porcupine/Porcupine4.jpg?itok=AClNQ9yc";
+var fondo = "assets/background.jpg";
 var escenario;
 var userBall = new Bola();
 var arrow = new Arrow();
@@ -92,6 +92,24 @@ Cell.prototype = {
             arrow.draw(this.canvas, this.ctx);
         }
     },
+
+    resizeAll: function(self, e) {
+        console.log("resize",e);
+
+        var ratio = V((window.innerWidth - 3) / self.ctx.canvas.width,
+                    (window.innerHeight - 3) / self.ctx.canvas.height);
+
+        self.ctx.canvas.width  = window.innerWidth - 3;
+        self.ctx.canvas.height = window.innerHeight - 3;
+
+        var width = self.ctx.canvas.width - 300;
+        var height = width*9/16;
+
+        escenario.resize(width, height);
+        userBall.Position = userBall.Position.Hadamard(ratio);
+        userBall.radio *= ratio.x;
+    },
+
     start: function() {
         var self = this;
 
@@ -124,7 +142,12 @@ Cell.prototype = {
         this.canvas.addEventListener("mousedown", this.createArrow);
         this.canvas.addEventListener("mousemove", this.updateArrow);
 
-        escenario = new Scenario(fondo,this.ctx, 800,600);
+        window.addEventListener("resize", function(e) {self.resizeAll(self,e)});
+
+        var width = this.ctx.canvas.width - 300;
+        var height = width*9/16;
+
+        escenario = new Scenario(fondo,this.ctx, width, height);
         escenario.init();
 
         setInterval(this.update.bind(this), 33);
