@@ -33,12 +33,15 @@ Bola.prototype.movement = function() {
 	}
 
 	//console.log(this.Position.x, this.Position.y);
+	var collide = this.checkCollision()
 
-	/*this.checkCollision();
-	var hole = this.checkCollisionHole()
-	if(hole) {
-		hole.absorve(this);
-	}*/
+	if(collide) {
+		this.direction = this.direction.multEsc(-1);
+		console.log(collide);
+	}
+
+
+
 }
 
 Bola.prototype.shoot = function() {

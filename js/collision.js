@@ -1,5 +1,5 @@
 Bola.prototype.checkCollision = function() {
-	this.collideWhitBola();
+	return this.collideWhitBola();
 }
 
 Bola.prototype.checkCircle = function(Circle1, Circle2) {
@@ -25,6 +25,7 @@ Bola.prototype.collideWhitBola = function() {
 			return col;
 		}
 	}
+	return false;
 }
 
 Bola.prototype.checkCollisionHole = function() {
