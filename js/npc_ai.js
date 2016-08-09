@@ -1,7 +1,7 @@
 function NPC(algorithm) {
 	this.idleTimeConst = 100;
 	this.waitingTime = this.idleTimeConst;
-	
+
 	this.targetAlgorithm = algorithm;
 
 	Bola.call(this);
@@ -16,7 +16,7 @@ NPC.prototype.update= function() {
 
 	switch(this.targetAlgorithm) {
 		case "chase":
-		if(this.speed.x == 0 && this.speed.y == 0) {
+		if(AI_ENABLED && this.speed.x == 0 && this.speed.y == 0) {
 			if(!(--this.waitingTime)){
 				var dest = userBall.Position;
 				this.speed = dest.substract(this.Position).multEsc(0.08);
@@ -26,7 +26,7 @@ NPC.prototype.update= function() {
 		break;
 
 		case "wander":
-		if(this.speed.x == 0 && this.speed.y == 0) {
+		if(AI_ENABLED && this.speed.x == 0 && this.speed.y == 0) {
 			if(!(--this.waitingTime)){
 				var dest = escenario.getRandomPos();
 				destDirection = dest.substract(this.Position);
@@ -38,6 +38,6 @@ NPC.prototype.update= function() {
 		}
 		break;
 	}
-		
+
 		this.movement();
 };
