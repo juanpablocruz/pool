@@ -17,10 +17,10 @@ Arrow.prototype = {
 
 	    log.Show("Size:",size);
 
-	  	if(size > 300) {
+	  	/*if(size > 300) {
 	  		size = 300;
 	  		this.endPos = subst.normalize().multEsc(size);
-	  	}
+	  	}*/
 
 	  	var fill = arrowColors[0];
 	  	if(size >= 250) {
