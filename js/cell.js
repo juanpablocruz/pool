@@ -44,6 +44,7 @@ Cell.prototype = {
     updateBalls: function() {
         for(var i = 1; i < this.pelotas.length; i++) {
             var element = this.pelotas[i];
+            console.log(element);
             if(element.status == "dead") {
                 this.pelotas.slice(i,1);
             } else {
@@ -138,7 +139,6 @@ Cell.prototype = {
         //this.drawCircle(centerX, centerY, radius, "green");
         userBall.init(V(250,200),25,"green", this.pelotas.length);
         this.pelotas.push(userBall);
-        userBall.listaBolas = this.pelotas;
 
         var colBola = new Bola(V(0,0),0,0);
         colBola.init(V(this.ctx.canvas.width/2,this.ctx.canvas.height/2),
@@ -166,6 +166,7 @@ Cell.prototype = {
 
         escenario = new Scenario(fondo,this.ctx, width, height);
         escenario.init();
+        escenario.listaBolas = this.pelotas;
 
         setInterval(this.update.bind(this), 33);
     },

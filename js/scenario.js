@@ -8,6 +8,7 @@ var Scenario = function(strDataURI,ctx,w,h) {
 	this.img.src = strDataURI;
 	this.origin = V(0,0);
 	this.holesList = [];
+	this.listaBolas = [];
 };
 
 Scenario.prototype = {
