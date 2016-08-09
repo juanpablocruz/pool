@@ -10,12 +10,17 @@ var Arrow = function() {
 Arrow.prototype = {
 	draw: function(canvas, ctx) {
 		var headlen = 10;   // length of head in pixels
-	  	var size = this.endPos.module(this.startPos);
 
-	  	/*if(size > 300) {
+		var subst = this.endPos.substract(this.startPos);
+	    var angle = Math.atan2(subst.y, subst.x);
+	    var size = subst.Length();
+
+	    log.show("Size:",size);
+
+	  	if(size > 300) {
 	  		size = 300;
-	  		this.endPos = this.endPos.normalize().multEsc(size);
-	  	}*/
+	  		this.endPos = subst.normalize().multEsc(size);
+	  	}
 
 	  	var fill = arrowColors[0];
 	  	if(size >= 250) {
