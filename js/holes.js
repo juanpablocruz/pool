@@ -24,6 +24,24 @@ Hole.prototype = {
 		}
 	},
 
+	draw: function(ctx, origin, holeImage) {
+        //this.ctx.putImageData(this.holeImage, this.pos.x, this.pos.y, this.pos.x, this.pos.y, this.pos.x+this.radio, this.pos.y+this.radio);
+        ctx.save();
+        ctx.globalCompositeOperation = "screen";
+        ctx.translate(origin.x-(this.radio/2),origin.y-(this.radio/2))
+        ctx.drawImage(holeImage, this.Position.x-(this.radio), this.Position.y-(this.radio), 
+        					this.radio*2, this.radio*2);
+
+        ctx.beginPath();
+        // ctx.arc(this.Position.x, this.Position.y, this.radio, 0, 2 * Math.PI, false);
+        ctx.fillStyle = "red";
+        ctx.fill();
+        ctx.lineWidth = 5;
+        //ctx.rotate(-Math.PI/4);
+        ctx.translate(-(origin.x-(this.radio/2)),-(origin.y-(this.radio/2)))
+		ctx.restore();
+	},
+
 	vortexAbsorve: function(bola) {
 		console.log("colisiono",bola.speed)
 		if(bola.Position.x > this.Position.x) {
