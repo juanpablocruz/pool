@@ -42,7 +42,7 @@ Cell.prototype = {
     },
 
     updateBalls: function() {
-        for(var i = 0; i < this.pelotas.length; i++) {
+        for(var i = 1; i < this.pelotas.length; i++) {
             var element = this.pelotas[i];
             if(element.status == "dead") {
                 this.pelotas.slice(i,1);
@@ -136,22 +136,23 @@ Cell.prototype = {
         var radius = 70;
 
         //this.drawCircle(centerX, centerY, radius, "green");
-        userBall.init(V(250,200),25,"green");
+        userBall.init(V(250,200),25,"green", this.pelotas.length);
+        this.pelotas.push(userBall);
         userBall.listaBolas = this.pelotas;
 
         var colBola = new Bola(V(0,0),0,0);
         colBola.init(V(this.ctx.canvas.width/2,this.ctx.canvas.height/2),
-                     30, "red");
+                     30, "red", this.pelotas.length);
         this.pelotas.push(colBola);
 
         var colBola2 = new NPC("wander");
         colBola2.init(V(-230 + this.ctx.canvas.width/2,this.ctx.canvas.height/2),
-                      30,"purple");
+                      30,"purple",this.pelotas.length);
         this.pelotas.push(colBola2);
 
         var colBola2 = new NPC("chase");
         colBola2.init(V(-530 + this.ctx.canvas.width,100-this.ctx.canvas.height/2),
-                      30,"yellow");
+                      30,"yellow", this.pelotas.length);
         this.pelotas.push(colBola2);
         
         this.canvas.addEventListener("mouseup", this.shootBallEvent);

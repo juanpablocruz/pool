@@ -19,10 +19,12 @@ Bola.prototype.checkCircle = function(Circle1, Circle2) {
 Bola.prototype.collideWhitBola = function() {
 	//console.log(this.listaBolas);
 	for(var i = 0; i < this.listaBolas.length; i++) {
-		var col = this.checkCircle(this, this.listaBolas[i]);
-		if(col){
-			//console.log("Choca con: ", i, " en: ", col);
-			return col;
+		if (this.listaBolas[i].id != this.id){
+			var col = this.checkCircle(this, this.listaBolas[i]);
+			if(col){
+				//console.log("Choca con: ", i, " en: ", col);
+				return col;
+			}
 		}
 	}
 	return false;
@@ -36,4 +38,8 @@ Bola.prototype.checkCollisionHole = function() {
 			return escenario.holesList[i];
 		}
 	}
+}
+
+Bola.prototype.collide = function() {
+	this.direction = this.direction.multEsc(-1);
 }

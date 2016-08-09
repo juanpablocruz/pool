@@ -33,15 +33,10 @@ Bola.prototype.movement = function() {
 	}
 
 	//console.log(this.Position.x, this.Position.y);
-	var collide = this.checkCollision()
 
-	if(collide) {
-		this.direction = this.direction.multEsc(-1);
-		console.log(collide);
+	if(this.checkCollision()) {
+		this.collide();
 	}
-
-
-
 }
 
 Bola.prototype.shoot = function() {
@@ -53,3 +48,4 @@ Bola.prototype.shoot = function() {
 		console.log("Espera que la bola se detenga...");
 	}
 }
+
