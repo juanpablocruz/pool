@@ -34,11 +34,11 @@ Bola.prototype.movement = function() {
 
 	//console.log(this.Position.x, this.Position.y);
 
-	this.checkCollision();
+	/*this.checkCollision();
 	var hole = this.checkCollisionHole()
 	if(hole) {
 		hole.absorve(this);
-	}
+	}*/
 }
 
 Bola.prototype.shoot = function() {

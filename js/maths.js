@@ -66,7 +66,7 @@ Vector.prototype = {
 		return Math.sqrt(this.LengthSq()); 
 	},
 
-	Clamp: function(min, val, max) {
+	_Clamp: function(min, val, max) {
 		var res = val;
 		if(res < min) res = min;
 		else if ( res > max) res = max;
@@ -74,14 +74,30 @@ Vector.prototype = {
 		return res;
 	},
 
+	ClampM: function(max) {
+		if(this.x > max) this.x = max;
+		if(this.y > max) this.y = max;
+	}, 
+	Clampm: function(min) {
+		if(this.x < min) this.x = min;
+		if(this.y < min) this.y = min;
+	}, 
+
 	Clamp01: function() {
 
 		var res = V(this.x, this.y);
-		res.x = Clamp(0.0, res.x, 1.0);
-		res.y = Clamp(0.0, res.y, 1.0);
+		res.x = _Clamp(0.0, res.x, 1.0);
+		res.y = _Clamp(0.0, res.y, 1.0);
 
 		return res;
 	},
+
+	normalize: function() {
+		var len = this.Length()
+		this.x = this.x / len;
+		this.y = this.y / len;
+		return this;
+	}
 
 }
 

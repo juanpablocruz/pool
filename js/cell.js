@@ -47,7 +47,7 @@ Cell.prototype = {
             if(element.status == "dead") {
                 this.pelotas.slice(i,1);
             } else {
-                //element.update();
+                element.update();
                 this.drawCircle(element.Position.x,
                           element.Position.y,
                           element.radio,
@@ -144,9 +144,14 @@ Cell.prototype = {
                      30, "red");
         this.pelotas.push(colBola);
 
-        var colBola2 = new Bola();
+        var colBola2 = new NPC("wander");
         colBola2.init(V(-230 + this.ctx.canvas.width/2,this.ctx.canvas.height/2),
                       30,"purple");
+        this.pelotas.push(colBola2);
+
+        var colBola2 = new NPC("chase");
+        colBola2.init(V(-530 + this.ctx.canvas.width,100-this.ctx.canvas.height/2),
+                      30,"yellow");
         this.pelotas.push(colBola2);
         
         this.canvas.addEventListener("mouseup", this.shootBallEvent);
