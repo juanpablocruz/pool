@@ -34,8 +34,8 @@ Bola.prototype.movement = function() {
 
 	//console.log(this.Position.x, this.Position.y);
 
-	if(colPoint = this.checkCollision()) {
-		this.collide(colPoint);
+	if(colTarget = this.checkCollision()) {
+		this.collide(colTarget);
 	}
 }
 
