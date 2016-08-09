@@ -4,17 +4,20 @@ var Log = function(ctx) {
     this.carret = 50;
     this.memory = [];
     this.show = true;
+    this.playing = true;
 }
 
 Log.prototype = {
     Show: function() {
-        var str = "";
-        for(var i=0; i < arguments.length; i++){
-            str += arguments[i]+" ";
-        }
-        this.memory.push(str);
-        if(this.memory.length >= 10) {
-            this.memory.shift();
+        if(this.playing) {
+            var str = "";
+            for(var i=0; i < arguments.length; i++){
+                str += arguments[i]+" ";
+            }
+            this.memory.push(str);
+            if(this.memory.length >= 10) {
+                this.memory.shift();
+            }
         }
         //this.update();
     },
