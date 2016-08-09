@@ -7,6 +7,7 @@ var escenario;
 var userBall = new Bola();
 var arrow = new Arrow();
 var log;
+var AI_ENABLED = true;
 
 function Cell(id) {
     if (window === this) {
@@ -130,12 +131,24 @@ Cell.prototype = {
         switch(e.key){
             case "1":
             log.show = !log.show;
+            log.Show("Log toggled");
             break;
             case "2":
+            if(log.playing)
+                log.Show("Log Stopped");
             log.playing = !log.playing;
+            if(log.playing)
+                log.Show("Log Started");
             break;
             case "3":
             log.cleanLog();
+            break;
+            case "4":
+                if(AI_ENABLED)
+                    log.Show("AI disabled");
+                else
+                    log.Show("AI enabled");
+                AI_ENABLED = !AI_ENABLED;
             break;
         }
     },

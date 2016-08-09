@@ -5,14 +5,14 @@ Bola.prototype.checkCollision = function() {
 Bola.prototype.checkCircle = function(Circle1, Circle2) {
 	//(x2-x1)^2 + (y1-y2)^2 <= (r1+r2)^2
 	if(((Circle2.Position.x - Circle1.Position.x)*(Circle2.Position.x - Circle1.Position.x) +
-		(Circle2.Position.y - Circle1.Position.y)*(Circle2.Position.y - Circle1.Position.y)) <= 
+		(Circle2.Position.y - Circle1.Position.y)*(Circle2.Position.y - Circle1.Position.y)) <=
 		((Circle1.radio+Circle2.radio)*(Circle1.radio+Circle2.radio)))
 	{
 		var b = Math.abs(Circle2.Position.y - Circle1.Position.y);
 		var a = Circle2.radio * (Math.abs(Circle2.Position.x - Circle1.Position.x) / (Circle2.radio + Circle1.radio));
 
 		return {colPoint:V(Circle2.Position.x + a, Circle2.Position.y + b), obj: Circle2};
-	}	
+	}
 	return false;
 }
 
@@ -23,8 +23,15 @@ Bola.prototype.collideWhitBola = function() {
 		if (escenario.listaBolas[i].id != this.id){
 			var col = this.checkCircle(this, escenario.listaBolas[i]);
 			if(col){
-				//console.log("Choca con: ", i, " en: ", col);
-				return col;
+				if(!col.obj.colliding) {
+					this.colliding = true;
+					col.obj.colliding = true;
+					return col;
+				}
+				else{
+					col.obj.colliding = false;
+					this.colliding = false;
+				}
 			}
 		}
 	}

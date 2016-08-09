@@ -15,8 +15,6 @@ Arrow.prototype = {
 	    var angle = Math.atan2(subst.y, subst.x);
 	    var size = subst.Length();
 
-	    log.Show("Size:",size);
-
 	  	/*if(size > 300) {
 	  		size = 300;
 	  		this.endPos = subst.normalize().multEsc(size);

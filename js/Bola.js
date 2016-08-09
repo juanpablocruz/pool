@@ -7,6 +7,7 @@ var Bola = function() {
 	this.direction = V(1,1);
 	this.listaBolas = [];
 	this.status = "innactive";
+	this.colliding = false;
 };
 
 Bola.prototype = {
@@ -17,7 +18,7 @@ Bola.prototype = {
 		this.status = "alive";
 		this.id = id;
 	},
-	getCursorXY: function(e) {   
+	getCursorXY: function(e) {
 	    CurX = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
 	    CurY = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
 		Cursor.x = CurX;
@@ -50,13 +51,13 @@ Bola.prototype = {
 				// Draw
 				if(this.radio <= 0){
 					this.status = "dead";
-				} 
+				}
 			} break;
 
 			default:
 			break;
 		}
-		
+
 
 	},
 };
