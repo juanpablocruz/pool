@@ -109,11 +109,20 @@ Scenario.prototype = {
 
 	drawHolesFunc: function(elem) {
         //this.ctx.putImageData(this.holeImage, elem.pos.x, elem.pos.y, elem.pos.x, elem.pos.y, elem.pos.x+elem.radio, elem.pos.y+elem.radio);
+        this.ctx.save();
+        this.ctx.globalCompositeOperation = "screen";
         this.ctx.translate(this.origin.x-(elem.radio/2),this.origin.y-(elem.radio/2))
-        this.ctx.drawImage(this.holeImage, elem.pos.x, elem.pos.y, 
-        					elem.radio, elem.radio);
+        this.ctx.drawImage(this.holeImage, elem.Position.x-(elem.radio), elem.Position.y-(elem.radio), 
+        					elem.radio*2, elem.radio*2);
+
+        this.ctx.beginPath();
+        this.ctx.arc(elem.Position.x, elem.Position.y, elem.radio, 0, 2 * Math.PI, false);
+        this.ctx.fillStyle = "red";
+        this.ctx.fill();
+        this.ctx.lineWidth = 5;
         //this.ctx.rotate(-Math.PI/4);
         this.ctx.translate(-(this.origin.x-(elem.radio/2)),-(this.origin.y-(elem.radio/2)))
+		this.ctx.restore();
 	},
 
 	drawHoles: function() {

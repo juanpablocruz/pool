@@ -1,4 +1,1 @@
-
-$(function() {
-    Cell("#cuadrito").start();
-})
+Cell("#cuadrito").start();

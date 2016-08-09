@@ -47,7 +47,7 @@ Cell.prototype = {
             if(element.status == "dead") {
                 this.pelotas.slice(i,1);
             } else {
-                element.update();
+                //element.update();
                 this.drawCircle(element.Position.x,
                           element.Position.y,
                           element.radio,
@@ -86,6 +86,15 @@ Cell.prototype = {
 
         // Update user ball
         userBall.update();
+        if(userBall.speed.x == 0 && userBall.speed.y == 0) {
+            this.ctx.save();
+            this.ctx.globalCompositeOperation = "screen";
+            this.drawCircle(userBall.Position.x,
+                  userBall.Position.y,
+                  userBall.radio+2,
+                  "rgba(255,255,0,0.5)");
+            this.ctx.restore();
+        }
         this.drawCircle(userBall.Position.x,
                   userBall.Position.y,
                   userBall.radio,

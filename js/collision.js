@@ -26,3 +26,13 @@ Bola.prototype.collideWhitBola = function() {
 		}
 	}
 }
+
+Bola.prototype.checkCollisionHole = function() {
+	for(var i = 0; i < escenario.holesList.length; i++) {
+		var col = this.checkCircle(this, escenario.holesList[i]);
+		if(col){
+			//console.log("Choca con: ", i, " en: ", col);
+			return escenario.holesList[i];
+		}
+	}
+}

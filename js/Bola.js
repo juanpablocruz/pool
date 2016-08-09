@@ -40,6 +40,7 @@ Bola.prototype = {
 			case "dying":
 			{
 				this.radio -= 0.25;
+				console.log("dying");
 				// Get pointer
 				this.getMouse();
 				// move
