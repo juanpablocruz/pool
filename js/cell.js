@@ -6,6 +6,7 @@ var fondo = "assets/background.jpg";
 var escenario;
 var userBall = new Bola();
 var arrow = new Arrow();
+var log;
 
 function Cell(id) {
     if (window === this) {
@@ -15,7 +16,7 @@ function Cell(id) {
         case "string":
             this.id = id;
             this.pelotas = [];
-            this.userBall = userBall; 
+            this.userBall = userBall;
             this.canvas = document.querySelector(id);
             break;
     }
@@ -44,7 +45,6 @@ Cell.prototype = {
     updateBalls: function() {
         for(var i = 1; i < this.pelotas.length; i++) {
             var element = this.pelotas[i];
-            console.log(element);
             if(element.status == "dead") {
                 this.pelotas.slice(i,1);
             } else {
@@ -54,7 +54,7 @@ Cell.prototype = {
                           element.radio,
                           element.color);
             }
-            
+
         }
     },
 
@@ -84,6 +84,8 @@ Cell.prototype = {
     update: function () {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         escenario.update();
+        if(log.show)
+            log.update();
 
         // Update user ball
         userBall.update();
@@ -124,6 +126,14 @@ Cell.prototype = {
         userBall.radio *= ratio.x;
     },
 
+    keyboardProcess: function(self,e) {
+        switch(e.key){
+            case "1":
+            log.show = !log.show;
+            break;
+        }
+    },
+
     start: function() {
         var self = this;
 
@@ -131,10 +141,12 @@ Cell.prototype = {
 
         this.ctx.canvas.width  = window.innerWidth - 3;
         this.ctx.canvas.height = window.innerHeight - 3;
-        
+
         var centerX = this.canvas.width / 2;
         var centerY = this.canvas.height / 2;
         var radius = 70;
+
+        log = new Log(this.ctx);
 
         //this.drawCircle(centerX, centerY, radius, "green");
         userBall.init(V(250,200),25,"green", this.pelotas.length);
@@ -154,11 +166,12 @@ Cell.prototype = {
         colBola2.init(V(-530 + this.ctx.canvas.width,100-this.ctx.canvas.height/2),
                       30,"yellow", this.pelotas.length);
         this.pelotas.push(colBola2);
-        
+
         this.canvas.addEventListener("mouseup", this.shootBallEvent);
         this.canvas.addEventListener("mousedown", this.createArrow);
         this.canvas.addEventListener("mousemove", this.updateArrow);
 
+        window.addEventListener("keypress", function(e) {self.keyboardProcess(self,e)});
         window.addEventListener("resize", function(e) {self.resizeAll(self,e)});
 
         var width = this.ctx.canvas.width - 300;

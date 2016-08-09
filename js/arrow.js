@@ -10,19 +10,16 @@ var Arrow = function() {
 Arrow.prototype = {
 	draw: function(canvas, ctx) {
 		var headlen = 10;   // length of head in pixels
-		var subst = this.endPos.substract(this.startPos);
-	    
-	    var angle = Math.atan2(subst.y, subst.x);
-	  	var size = subst.Length();
 
-/*
-	  	if(size > 300) {
+		var subst = this.endPos.substract(this.startPos);
+	    var angle = Math.atan2(subst.y, subst.x);
+	    var size = subst.Length();
+
+	    log.Show("Size:",size);
+
+	  	/*if(size > 300) {
 	  		size = 300;
-	  		posX = Math.cos(angle)*size;
-	  		posY = Math.sin(angle)*size;
-	  		if(!posX)posX = this.startPos.x; 
-	  		if(!posY)posY = this.startPos.y; 
-	  		this.endPos = V(posX, posY);
+	  		this.endPos = subst.normalize().multEsc(size);
 	  	}*/
 
 	  	var fill = arrowColors[0];
@@ -31,7 +28,6 @@ Arrow.prototype = {
 	  	} else if(size >= 80) {
 	  		fill = arrowColors[1];
 	  	}
-
 
 
 	    ctx.beginPath();
