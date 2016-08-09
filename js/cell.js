@@ -131,6 +131,9 @@ Cell.prototype = {
             case "1":
             log.show = !log.show;
             break;
+            case "2":
+            log.playing = !log.playing;
+            break;
         }
     },
 
