@@ -19,8 +19,11 @@ Log.prototype = {
                 this.memory.shift();
             }
         }
-        //this.update();
     },
+    cleanLog: function() {
+        this.memory = [];
+    },
+
     update: function() {
         this.carret = 50;
         for (var i = 0; i < this.memory.length; i++) {
