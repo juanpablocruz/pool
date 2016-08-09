@@ -134,6 +134,9 @@ Cell.prototype = {
             case "2":
             log.playing = !log.playing;
             break;
+            case "3":
+            log.cleanLog();
+            break;
         }
     },
 
@@ -181,6 +184,7 @@ Cell.prototype = {
         var height = width*9/16;
 
         escenario = new Scenario(fondo,this.ctx, width, height);
+        escenario.padding = V(80,0);
         escenario.init();
         escenario.listaBolas = this.pelotas;
 

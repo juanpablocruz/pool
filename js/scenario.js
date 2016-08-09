@@ -9,11 +9,12 @@ var Scenario = function(strDataURI,ctx,w,h) {
 	this.origin = V(0,0);
 	this.holesList = [];
 	this.listaBolas = [];
+	this.padding = V(0,0);
 };
 
 Scenario.prototype = {
 	init: function() {
-		this.origin = V((this.ctx.canvas.width/2)-(this.width/2), (this.ctx.canvas.height/2)-(this.height/2));
+		this.origin = V((this.ctx.canvas.width/2)-(this.width/2)+this.padding.x, (this.ctx.canvas.height/2)-(this.height/2)+this.padding.y);
 		this.borderLeftImg = new Image;
 		this.borderLeftImg.src = "assets/border_left.jpg";
 		this.borderRightImg = new Image;
@@ -29,13 +30,13 @@ Scenario.prototype = {
 			self.backgroundPattern = self.ctx.createPattern(self.img,"repeat");
 		}
 		this.prepareHoleImage();
-		
+
 	},
 
 	prepareHoleImage: function() {
 		var src = "assets/vortex.png";
 		var tempImg = new Image();
-		
+
 		tempImg.src = src;
 		this.holeImage = tempImg;
 		/*var self = this;
@@ -51,7 +52,7 @@ Scenario.prototype = {
 			image.data = imageData;
 			self.holeImage = image;
 		}*/
-		
+
 	},
 
 	update: function() {
@@ -66,23 +67,23 @@ Scenario.prototype = {
 
 	drawBorders: function() {
 		// Left border
-		this.ctx.drawImage(this.borderLeftImg, 0, 0, this.borderLeftImg.width, this.borderLeftImg.height, 
-										    this.origin.x-this.borderLeftImg.width, this.origin.y-this.borderLeftImg.width, 
+		this.ctx.drawImage(this.borderLeftImg, 0, 0, this.borderLeftImg.width, this.borderLeftImg.height,
+										    this.origin.x-this.borderLeftImg.width, this.origin.y-this.borderLeftImg.width,
 										    this.borderLeftImg.width, this.height+2*this.borderLeftImg.width);
 
 		// Right border
-		this.ctx.drawImage(this.borderRightImg, 0, 0, this.borderRightImg.width, this.borderRightImg.height, 
-										    this.origin.x+this.width, this.origin.y-this.borderRightImg.width, 
+		this.ctx.drawImage(this.borderRightImg, 0, 0, this.borderRightImg.width, this.borderRightImg.height,
+										    this.origin.x+this.width, this.origin.y-this.borderRightImg.width,
 										    this.borderRightImg.width, this.height+2*this.borderRightImg.width);
 
 		// Top border
-		this.ctx.drawImage(this.borderTopImg, 0, 0, this.borderTopImg.width, this.borderTopImg.height, 
-										    this.origin.x-this.borderLeftImg.width, this.origin.y-(this.borderBottomImg.height), 
+		this.ctx.drawImage(this.borderTopImg, 0, 0, this.borderTopImg.width, this.borderTopImg.height,
+										    this.origin.x-this.borderLeftImg.width, this.origin.y-(this.borderBottomImg.height),
 										    this.width+2*(this.borderBottomImg.height), this.borderBottomImg.height);
 
 		// Bottom border
-		this.ctx.drawImage(this.borderBottomImg, 0, 0, this.borderBottomImg.width, this.borderBottomImg.height, 
-										    this.origin.x-this.borderLeftImg.width, this.origin.y+this.height, 
+		this.ctx.drawImage(this.borderBottomImg, 0, 0, this.borderBottomImg.width, this.borderBottomImg.height,
+										    this.origin.x-this.borderLeftImg.width, this.origin.y+this.height,
 										    this.width+2*(this.borderBottomImg.height), this.borderBottomImg.height);
 
 	},
@@ -112,12 +113,12 @@ Scenario.prototype = {
 		for(var i = 0; i < this.holesList.length; i++){
 			this.holesList[i].draw(this.ctx, this.origin, this.holeImage);
 		}
-		
+
 	},
 
 	draw: function() {
 		//this.ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, this.origin.x, this.origin.y, this.width, this.height);
-		
+
 		this.ctx.rect(this.origin.x, this.origin.y,this.width, this.height);
 		this.ctx.fillStyle=this.backgroundPattern;
 		this.ctx.fill();
