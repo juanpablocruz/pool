@@ -1,4 +1,5 @@
 var Bola = function() {
+	this.id = 0;
 	this.Position = V(250,200);
 	this.radio = 25;
 	this.color = "green";
@@ -9,11 +10,12 @@ var Bola = function() {
 };
 
 Bola.prototype = {
-	init: function(pos, radio, color) {
+	init: function(pos, radio, color, id) {
 		this.Position = pos;
 		this.radio = radio;
 		this.color = color;
 		this.status = "alive";
+		this.id = id;
 	},
 	getCursorXY: function(e) {   
 	    CurX = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
