@@ -11,7 +11,7 @@ Bola.prototype.checkCircle = function(Circle1, Circle2) {
 		var b = Math.abs(Circle2.Position.y - Circle1.Position.y);
 		var a = Circle2.radio * (Math.abs(Circle2.Position.x - Circle1.Position.x) / (Circle2.radio + Circle1.radio));
 
-		return colPoint = V(Circle2.Position.x + a, Circle2.Position.y + b);
+		return {colPoint:V(Circle2.Position.x + a, Circle2.Position.y + b), obj: Circle2};
 	}	
 	return false;
 }
@@ -41,9 +41,13 @@ Bola.prototype.checkCollisionHole = function() {
 	}
 }
 
-Bola.prototype.collide = function(colPoint) {
+Bola.prototype.collide = function(colTarget) {
 	var speedModule = this.speed.Length();
-	var speed2 = colPoint.substract(this.Position).multEsc(speedModule/colPoint.distance(this.Position));
-	this.speed = V(-speed2.y, speed2.x);
+	var speedModule2 = colTarget.obj.speed.Length();
+	var speed = colTarget.colPoint.substract(this.Position).multEsc(1/colTarget.colPoint.distance(this.Position));
+	var newSpeed = (speedModule + speedModule2)/2;
+	colTarget.obj.speed = speed.multEsc(newSpeed);
+	this.speed = V(speed.y, speed.x).multEsc(newSpeed);
 	//this.direction = this.direction.multEsc(-1);
+	colTarget.obj.direction = colTarget.obj.direction.multEsc(-1);
 }
