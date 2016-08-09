@@ -11,16 +11,17 @@ Bola.prototype.checkCircle = function(Circle1, Circle2) {
 		var b = Math.abs(Circle2.Position.y - Circle1.Position.y);
 		var a = Circle2.radio * (Math.abs(Circle2.Position.x - Circle1.Position.x) / (Circle2.radio + Circle1.radio));
 
-		return colPoint = {x:Circle2.Position.x + a, y:Circle2.Position.y + b};
+		return colPoint = V(Circle2.Position.x + a, Circle2.Position.y + b);
 	}	
 	return false;
 }
 
 Bola.prototype.collideWhitBola = function() {
 	//console.log(this.listaBolas);
-	for(var i = 0; i < this.listaBolas.length; i++) {
-		if (this.listaBolas[i].id != this.id){
-			var col = this.checkCircle(this, this.listaBolas[i]);
+
+	for(var i = 0; i < escenario.listaBolas.length; i++) {
+		if (escenario.listaBolas[i].id != this.id){
+			var col = this.checkCircle(this, escenario.listaBolas[i]);
 			if(col){
 				//console.log("Choca con: ", i, " en: ", col);
 				return col;
@@ -40,6 +41,9 @@ Bola.prototype.checkCollisionHole = function() {
 	}
 }
 
-Bola.prototype.collide = function() {
-	this.direction = this.direction.multEsc(-1);
+Bola.prototype.collide = function(colPoint) {
+	var speedModule = this.speed.Length();
+	var speed2 = colPoint.substract(this.Position).multEsc(speedModule/colPoint.distance(this.Position));
+	this.speed = V(-speed2.y, speed2.x);
+	//this.direction = this.direction.multEsc(-1);
 }
