@@ -7,7 +7,7 @@ var Log = function(ctx) {
 }
 
 Log.prototype = {
-    show: function() {
+    Show: function() {
         var str = "";
         for(var i=0; i < arguments.length; i++){
             str += arguments[i]+" ";

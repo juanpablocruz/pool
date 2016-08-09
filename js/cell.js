@@ -45,7 +45,6 @@ Cell.prototype = {
     updateBalls: function() {
         for(var i = 1; i < this.pelotas.length; i++) {
             var element = this.pelotas[i];
-            console.log(element);
             if(element.status == "dead") {
                 this.pelotas.slice(i,1);
             } else {
@@ -127,6 +126,14 @@ Cell.prototype = {
         userBall.radio *= ratio.x;
     },
 
+    keyboardProcess: function(self,e) {
+        switch(e.key){
+            case "1":
+            log.show = !log.show;
+            break;
+        }
+    },
+
     start: function() {
         var self = this;
 
@@ -164,6 +171,7 @@ Cell.prototype = {
         this.canvas.addEventListener("mousedown", this.createArrow);
         this.canvas.addEventListener("mousemove", this.updateArrow);
 
+        window.addEventListener("keypress", function(e) {self.keyboardProcess(self,e)});
         window.addEventListener("resize", function(e) {self.resizeAll(self,e)});
 
         var width = this.ctx.canvas.width - 300;
