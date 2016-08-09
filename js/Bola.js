@@ -2,6 +2,7 @@ var Bola = function() {
 	this.id = 0;
 	this.Position = V(250,200);
 	this.radio = 25;
+	this.mass = 2;
 	this.color = "green";
 	this.speed = V(0,0);
 	this.direction = V(1,1);
