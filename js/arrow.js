@@ -9,6 +9,7 @@ var Arrow = function() {
 
 Arrow.prototype = {
 	draw: function(canvas, ctx) {
+		ctx.save();
 		var headlen = 10;   // length of head in pixels
 
 		var subst = this.endPos.substract(this.startPos);
@@ -19,9 +20,6 @@ Arrow.prototype = {
 	    dirVec.normalize();
 
 	  	if(size > 300) {
-	  		/*log.Show("Arrow Size: ", size)
-	  		log.Show("Arrow x: ", dirVec.x)
-	  		log.Show("Arrow y: ", dirVec.y)*/
 	  		size = 300;
 	  		this.endPos = this.startPos.add(dirVec.multEsc(size));
 	  	}
@@ -59,5 +57,6 @@ Arrow.prototype = {
 	    ctx.stroke();
 	    ctx.fillStyle = fill;
 	    ctx.fill();
+	    ctx.restore();
 	},
 }

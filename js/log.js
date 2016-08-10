@@ -26,9 +26,12 @@ Log.prototype = {
 
     update: function() {
         this.carret = 50;
+        this.ctx.save();
+        this.ctx.fillStyle = "rgb(0, 200, 0)";
         for (var i = 0; i < this.memory.length; i++) {
             this.ctx.fillText(this.memory[i],10,this.carret);
             this.carret += 16;
         }
+        this.ctx.restore();
     }
 }

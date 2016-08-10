@@ -66,6 +66,7 @@ Scenario.prototype = {
 	},
 
 	drawBorders: function() {
+		this.ctx.save();
 		// Left border
 		this.ctx.drawImage(this.borderLeftImg, 0, 0, this.borderLeftImg.width, this.borderLeftImg.height,
 										    this.origin.x-this.borderLeftImg.width, this.origin.y-this.borderLeftImg.width,
@@ -85,7 +86,7 @@ Scenario.prototype = {
 		this.ctx.drawImage(this.borderBottomImg, 0, 0, this.borderBottomImg.width, this.borderBottomImg.height,
 										    this.origin.x-this.borderLeftImg.width, this.origin.y+this.height,
 										    this.width+2*(this.borderBottomImg.height), this.borderBottomImg.height);
-
+		this.ctx.restore();
 	},
 
 	getRandomPos: function() {
@@ -118,10 +119,11 @@ Scenario.prototype = {
 
 	draw: function() {
 		//this.ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, this.origin.x, this.origin.y, this.width, this.height);
-
+		this.ctx.save();
 		this.ctx.rect(this.origin.x, this.origin.y,this.width, this.height);
 		this.ctx.fillStyle=this.backgroundPattern;
 		this.ctx.fill();
+		this.ctx.restore();
 		this.drawBorders();
 		this.drawHoles();
 	},
