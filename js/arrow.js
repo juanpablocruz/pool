@@ -15,10 +15,16 @@ Arrow.prototype = {
 	    var angle = Math.atan2(subst.y, subst.x);
 	    var size = subst.Length();
 
-	  	/*if(size > 300) {
+	    var dirVec = subst;
+	    dirVec.normalize();
+
+	  	if(size > 300) {
+	  		/*log.Show("Arrow Size: ", size)
+	  		log.Show("Arrow x: ", dirVec.x)
+	  		log.Show("Arrow y: ", dirVec.y)*/
 	  		size = 300;
-	  		this.endPos = subst.normalize().multEsc(size);
-	  	}*/
+	  		this.endPos = this.startPos.add(dirVec.multEsc(size));
+	  	}
 
 	  	var fill = arrowColors[0];
 	  	if(size >= 250) {

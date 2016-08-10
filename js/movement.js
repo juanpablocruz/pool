@@ -63,7 +63,7 @@ Bola.prototype.movement = function() {
 }
 
 Bola.prototype.shoot = function() {
-	var cursor = V(Cursor.x, Cursor.y);
+	var cursor = V(arrow.endPos.x, arrow.endPos.y);
 
 	if (this.speed.x == 0 && this.speed.y ==0) {
 		this.speed = cursor.substract(this.Position).multEsc(0.1);
