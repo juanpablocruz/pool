@@ -1,4 +1,8 @@
 Bola.prototype.checkCollision = function() {
+	if (hole = this.checkCollisionHole()) {
+		hole.absorve();
+		return false;
+	}
 	return this.collideWhitBola();
 }
 
@@ -34,7 +38,7 @@ Bola.prototype.collideWhitBola = function() {
 				}
 			}
 		}
-	}
+	}3443
 	return false;
 }
 
@@ -46,6 +50,7 @@ Bola.prototype.checkCollisionHole = function() {
 			return escenario.holesList[i];
 		}
 	}
+	return false;
 }
 
 Bola.prototype.collide = function(colTarget) {
@@ -75,9 +80,12 @@ Bola.prototype.collide = function(colTarget) {
 
 	if (vn > 0) return;
 
-	var i = (-(1 + 0.85) * vn) / (im1 + im2);
-	var impulse = mtd.multEsc(i);
+	var i1 = (-(1 + this.restitution) * vn) / (im1 + im2);
+	var impulse1 = mtd.multEsc(i1);
 
-	this.speed = this.speed.add(impulse.multEsc(im1));
-	ball.speed = ball.speed.substract(impulse.multEsc(im2));
+	var i2 = (-(1 + ball.restitution) * vn) / (im1 + im2);
+	var impulse2 = mtd.multEsc(i2);
+
+	this.speed = this.speed.add(impulse1.multEsc(im1));
+	ball.speed = ball.speed.substract(impulse2.multEsc(im2));
 }

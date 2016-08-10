@@ -9,6 +9,7 @@ var Bola = function() {
 	this.listaBolas = [];
 	this.status = "innactive";
 	this.colliding = false;
+	this.restitution = 0.85;
 };
 
 Bola.prototype = {

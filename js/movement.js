@@ -66,7 +66,7 @@ Bola.prototype.shoot = function() {
 	var cursor = V(Cursor.x, Cursor.y);
 
 	if (this.speed.x == 0 && this.speed.y ==0) {
-		this.speed = cursor.substract(this.Position).multEsc(0.2);
+		this.speed = cursor.substract(this.Position).multEsc(0.1);
 	} else {
 		console.log("Espera que la bola se detenga...");
 	}

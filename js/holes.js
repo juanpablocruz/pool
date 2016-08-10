@@ -33,7 +33,7 @@ Hole.prototype = {
         					this.radio*2, this.radio*2);
 
         ctx.beginPath();
-        // ctx.arc(this.Position.x, this.Position.y, this.radio, 0, 2 * Math.PI, false);
+        //ctx.arc(this.Position.x, this.Position.y, this.radio, 0, 2 * Math.PI, false);
         ctx.fillStyle = "red";
         ctx.fill();
         ctx.lineWidth = 5;
@@ -43,35 +43,7 @@ Hole.prototype = {
 	},
 
 	vortexAbsorve: function(bola) {
-		console.log("colisiono",bola.speed)
-		if(bola.Position.x > this.Position.x) {
-			if(bola.direction < 0) {
-				bola.speed.x -= bola.speed.x/1.2;
-			} else {
-				bola.speed.x -= bola.speed.x/1.2;
-			}
-		} else if(bola.Position.x < this.Position.x) {
-			if(bola.direction > 0) {
-				bola.speed.x -= bola.speed.x/1.2;
-			} else {
-				bola.speed.x -= bola.speed.x/1.2;
-			}
-		}
-
-		if(bola.Position.y > this.Position.y) {
-			if(bola.direction < 0) {
-				bola.speed.y -= bola.speed.y/1.2;
-			} else {
-				bola.speed.y -= bola.speed.y/1.2;
-			}
-		} else if(bola.Position.y < this.Position.y) {
-			if(bola.direction < 0) {
-				bola.speed.y -= bola.speed.y/1.2;
-			} else {
-				bola.speed.y -= bola.speed.y/1.2;
-			}
-		}
-		console.log(bola)
+		log.Show("Te trago!")
 
 	}
 
